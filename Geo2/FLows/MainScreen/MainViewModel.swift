@@ -7,19 +7,98 @@
 
 import Foundation
 import MapKit
+import Combine
 
 protocol MainViewModelProtocol {
-    var myLocation: CLLocation { get set }
+    var profileUser: User { get set }
+    func didSelectRowAt(indexPath: IndexPath)
 }
 
 final class MainViewModel {
-    var myLocation = CLLocation()
     
-    init(myLocation: CLLocation = CLLocation()) {
-        self.myLocation = myLocation
-        LocationManager.shared.getUserLocation { location in
-            self.myLocation = location
+    var profileUser = User(name: "e-legion", imageName: "logo")
+    var selectedUser: User
+    var users: [User]
+    
+    private var timer = Timer()
+    private var view: MainViewController
+    private let dataService: MockServiceProtocol
+    private let latitudeRange: ClosedRange<Double> = (-90.0...90.0)
+    private let longitudeRange: ClosedRange<Double> = (-180.0...180.0)
+
+    
+    init(dataService: MockServiceProtocol, view: MainViewController) {
+        self.dataService = dataService
+        self.view = view
+        self.selectedUser = profileUser
+        users = dataService.fetchUsersFromAPI()
+        start()
+    }
+    
+    
+    func start() {
+        updateData()
+        LocationService.shared.getUserLocation { [weak self] location in
+            guard let self else { return }
+            self.profileUser.location = location
+            self.selectedUser = self.profileUser
+            self.view.updateProfileData(user: self.profileUser)
+            self.refreshUsers()
+            self.calculate(distanceTo: self.selectedUser)
+            self.view.reloadData()
         }
+    }
+    
+    func updateData() {
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
+            guard let self else { return }
+            self.refreshUsers()
+            self.calculate(distanceTo: self.selectedUser)
+            self.view.reloadData()
+        }
+    }
+    
+    func didSelectRowAt(indexPath: IndexPath) {
+
+        if selectedUser.id == profileUser.id {
+            selectedUser = users[indexPath.row]
+            users.insert(selectedUser, at: 0)
+        } else if selectedUser.id == users[indexPath.row].id {
+            users.removeFirst()
+            selectedUser = profileUser
+        } else {
+            users.removeFirst()
+            selectedUser = users[indexPath.row - 1]
+            users.insert(users[indexPath.row - 1], at: 0)
+
+        }
+        calculate(distanceTo: selectedUser)
+        self.view.reloadData()
+    }
+
+    func refreshUsers() {
+        var refreshedUsers: [User] = []
+        for i in self.users {
+            var user = i
+            if user.id != selectedUser.id {
+                user.refreshCoordinates()
+            }
+            refreshedUsers.append(user)
+            if selectedUser.id == user.id {
+                selectedUser = user
+            }
+        }
+        users = refreshedUsers
+    }
+    
+    func calculate(distanceTo: User) {
+        var refreshedUsers: [User] = []
+        for i in self.users {
+            var user = i
+            user.distanse = user.location.distance(from: distanceTo.location)
+            refreshedUsers.append(user)
+        }
+        users = refreshedUsers
     }
 }
 

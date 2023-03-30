@@ -17,7 +17,7 @@
 		E8AF1C9729D436EB0068AA32 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C9629D436EB0068AA32 /* UserInfoView.swift */; };
 		E8AF1C9929D439240068AA32 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C9829D439240068AA32 /* MainModel.swift */; };
 		E8AF1C9C29D456330068AA32 /* MockUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C9B29D456330068AA32 /* MockUserService.swift */; };
-		E8AF1C9E29D456B60068AA32 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C9D29D456B60068AA32 /* LocationManager.swift */; };
+		E8AF1C9E29D456B60068AA32 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C9D29D456B60068AA32 /* LocationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,7 @@
 		E8AF1C9629D436EB0068AA32 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		E8AF1C9829D439240068AA32 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		E8AF1C9B29D456330068AA32 /* MockUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserService.swift; sourceTree = "<group>"; };
-		E8AF1C9D29D456B60068AA32 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		E8AF1C9D29D456B60068AA32 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				E8AF1C9B29D456330068AA32 /* MockUserService.swift */,
+				E8AF1C9D29D456B60068AA32 /* LocationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -117,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				E8AF1C9629D436EB0068AA32 /* UserInfoView.swift */,
-				E8AF1C9D29D456B60068AA32 /* LocationManager.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -200,7 +200,7 @@
 				E8AF1C9729D436EB0068AA32 /* UserInfoView.swift in Sources */,
 				E8AF1C8D29D412D90068AA32 /* MainViewModel.swift in Sources */,
 				E8AF1C9529D423DF0068AA32 /* UserTableViewCell.swift in Sources */,
-				E8AF1C9E29D456B60068AA32 /* LocationManager.swift in Sources */,
+				E8AF1C9E29D456B60068AA32 /* LocationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

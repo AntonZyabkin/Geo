@@ -8,7 +8,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    var viewModel: MainViewModelProtocol?
+    var viewModel: MainViewModel?
     
     private lazy var profileBackgroundView: UIView = {
        let view = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
@@ -62,7 +62,6 @@ class MainViewController: UIViewController {
         stackView.alignment = .leading
         stackView.distribution = .fillProportionally
         stackView.backgroundColor = .white
-//        stackView.spacing = 5
         stackView.layer.cornerRadius = 15
         return stackView
     }()
@@ -70,6 +69,7 @@ class MainViewController: UIViewController {
     private lazy var usersTableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
+        tableView.bounces = false
         tableView.separatorStyle = .none
         return tableView
     }()
@@ -83,6 +83,14 @@ class MainViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         configSubviews()
+    }
+    
+    func reloadData() {
+        usersTableView.reloadData()
+    }
+    func updateProfileData(user: User) {
+        latitudeLabel.text = "latitude: \(user.location.coordinate.latitude)"
+        longitudeLabel.text = "longitude: \(user.location.coordinate.longitude)"
     }
     
     private func configSubviews() {
@@ -129,12 +137,21 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        20
+        viewModel?.users.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.identifier, for: indexPath) as? UserTableViewCell else { return UITableViewCell()}
-        cell.configureCell(User(name: "Anatan", imageName: "logo", latitude: 0, longitude: 0, distanse: 12341.12))
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.identifier, for: indexPath) as? UserTableViewCell,
+            let user = viewModel?.users[indexPath.row]
+        else {
+            return UITableViewCell()
+        }
+        cell.updateCell(user)
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard var viewModel else { return }
+        viewModel.didSelectRowAt(indexPath: indexPath)
     }
 }

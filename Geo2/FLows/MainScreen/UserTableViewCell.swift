@@ -10,11 +10,10 @@ import UIKit
 class UserTableViewCell: UITableViewCell {
     
     static let identifier = "UserTableViewCell"
-    
+    var view = UserInfoView(frame: .zero , user: User())
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .clear
-        contentView.backgroundColor = .white
+        configureCell()
     }
     
     required init?(coder: NSCoder) {
@@ -31,14 +30,12 @@ class UserTableViewCell: UITableViewCell {
         super.layoutSubviews()
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8))
     }
-    func configureCell(_ user: User) {
-        
+    
+    func configureCell() {
+        contentView.addSubview(view)
         backgroundColor = .clear
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 16
-    
-        let view = UserInfoView(frame: frame , user: user)
-        contentView.addSubview(view)
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
@@ -46,6 +43,10 @@ class UserTableViewCell: UITableViewCell {
             view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
         ])
         view.translatesAutoresizingMaskIntoConstraints = false
-        
+    }
+    
+    
+    func updateCell(_ user: User) {
+        view.configSubviews(user: user)
     }
 }

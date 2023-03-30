@@ -57,14 +57,13 @@ class UserInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configSubviews(user: User) {
+    func configSubviews(user: User) {
         logoImageView.image = UIImage(named: user.imageName)
-        userNameLabel.text = "Name: \(user.name)"
-        distanceLabel.text = "Distanse: \(String(user.distanse))"
+        userNameLabel.text = user.name
+        distanceLabel.text =  String(format:  "Distanse: %.01f km", user.distanse/1000)
     }
     
-    
-    internal override func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         
         addSubview(logoImageView)

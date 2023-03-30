@@ -1,5 +1,5 @@
 //
-//  LocationManager.swift
+//  LocationService.swift
 //  Geo2
 //
 //  Created by Anton Zyabkin on 29.03.2023.
@@ -8,20 +8,21 @@
 import Foundation
 import CoreLocation
 
-final class LocationManager: NSObject {
-    static let shared = LocationManager()
-    let manager = CLLocationManager()
+
+final class LocationService: NSObject {
+    static let shared = LocationService()
+    let service = CLLocationManager()
     var complition: ((CLLocation)-> Void)?
     
     public func getUserLocation(complition: @escaping (CLLocation)-> Void) {
         self.complition = complition
-        manager.requestWhenInUseAuthorization()
-        manager.delegate = self
-        manager.startUpdatingLocation()
+        service.requestWhenInUseAuthorization()
+        service.delegate = self
+        service.startUpdatingLocation()
     }
 }
 
-extension LocationManager: CLLocationManagerDelegate {
+extension LocationService: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else { return }
         complition?(location)
