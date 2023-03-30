@@ -11,7 +11,7 @@ class MainViewController: UIViewController {
     var viewModel: MainViewModel?
     
     private lazy var profileBackgroundView: UIView = {
-       let view = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
         view.backgroundColor = .white
         view.layer.cornerRadius = 15
         return view
@@ -67,11 +67,20 @@ class MainViewController: UIViewController {
     }()
     
     private lazy var usersTableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .plain)
         tableView.backgroundColor = .clear
         tableView.bounces = false
         tableView.separatorStyle = .none
         return tableView
+    }()
+    
+    lazy var pinedUserView: PinedUserView = {
+        let view = PinedUserView(frame: .zero, user: User(name: "da", imageName: "logo"))
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 15
+        view.backgroundColor = .systemTeal
+        view.alpha = 0
+        return view
     }()
     
     override func viewDidLoad() {
@@ -93,12 +102,25 @@ class MainViewController: UIViewController {
         longitudeLabel.text = "longitude: \(user.location.coordinate.longitude)"
     }
     
+    func pinUser(user: User) {
+        pinedUserView.configSubviews(user: user)
+        if user.distanse != 0.0 {
+            pinedUserView.alpha = 1
+        } else {
+            pinedUserView.alpha = 0
+        }
+    }
+    func unpinUser() {
+        pinedUserView.alpha = 0
+    }
+    
     private func configSubviews() {
         view.addSubview(profileBackgroundView)
         view.addSubview(usersTableView)
+        view.addSubview(pinedUserView)
         profileBackgroundView.addSubview(profileImageView)
         profileBackgroundView.addSubview(profileInfoVStack)
-
+        
         NSLayoutConstraint.activate([
             profileBackgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
             profileBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -109,24 +131,31 @@ class MainViewController: UIViewController {
             profileImageView.leadingAnchor.constraint(equalTo: profileBackgroundView.leadingAnchor, constant: 10),
             profileImageView.heightAnchor.constraint(equalTo: profileBackgroundView.heightAnchor, constant: -20),
             profileImageView.widthAnchor.constraint(equalTo: profileBackgroundView.heightAnchor, constant: -20),
-
+            
             profileInfoVStack.topAnchor.constraint(equalTo: profileBackgroundView.topAnchor, constant: 10),
             profileInfoVStack.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 20),
             profileInfoVStack.trailingAnchor.constraint(equalTo: profileBackgroundView.trailingAnchor, constant: -10),
             profileInfoVStack.bottomAnchor.constraint(equalTo: profileBackgroundView.bottomAnchor, constant: -30),
-
+            
             usersTableView.topAnchor.constraint(equalTo: profileBackgroundView.bottomAnchor, constant: 30),
             usersTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             usersTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            usersTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
+            usersTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            
+            pinedUserView.topAnchor.constraint(equalTo: profileBackgroundView.bottomAnchor, constant: 30),
+            pinedUserView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            pinedUserView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            pinedUserView.heightAnchor.constraint(equalToConstant: 92),
+            
         ])
         
         profileBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileInfoVStack.translatesAutoresizingMaskIntoConstraints = false
         usersTableView.translatesAutoresizingMaskIntoConstraints = false
+        pinedUserView.translatesAutoresizingMaskIntoConstraints = false
     }
-        
+    
     private func configeTableView() {
         usersTableView.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
         usersTableView.rowHeight = 100
@@ -151,7 +180,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard var viewModel else { return }
-        viewModel.didSelectRowAt(indexPath: indexPath)
+        viewModel?.didSelectRowAt(indexPath: indexPath)
     }
 }

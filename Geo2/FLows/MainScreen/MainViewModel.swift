@@ -23,9 +23,6 @@ final class MainViewModel {
     private var timer = Timer()
     private var view: MainViewController
     private let dataService: MockServiceProtocol
-    private let latitudeRange: ClosedRange<Double> = (-90.0...90.0)
-    private let longitudeRange: ClosedRange<Double> = (-180.0...180.0)
-
     
     init(dataService: MockServiceProtocol, view: MainViewController) {
         self.dataService = dataService
@@ -34,7 +31,6 @@ final class MainViewModel {
         users = dataService.fetchUsersFromAPI()
         start()
     }
-    
     
     func start() {
         updateData()
@@ -50,11 +46,12 @@ final class MainViewModel {
     }
     
     func updateData() {
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
             guard let self else { return }
             self.refreshUsers()
             self.calculate(distanceTo: self.selectedUser)
             self.view.reloadData()
+            self.view.pinedUserView.configSubviews(user: self.selectedUser)
         }
     }
     
@@ -63,6 +60,7 @@ final class MainViewModel {
         if selectedUser.id == profileUser.id {
             selectedUser = users[indexPath.row]
             users.insert(selectedUser, at: 0)
+
         } else if selectedUser.id == users[indexPath.row].id {
             users.removeFirst()
             selectedUser = profileUser
@@ -70,12 +68,12 @@ final class MainViewModel {
             users.removeFirst()
             selectedUser = users[indexPath.row - 1]
             users.insert(users[indexPath.row - 1], at: 0)
-
         }
         calculate(distanceTo: selectedUser)
+        view.pinUser(user: selectedUser)
         self.view.reloadData()
     }
-
+    
     func refreshUsers() {
         var refreshedUsers: [User] = []
         for i in self.users {

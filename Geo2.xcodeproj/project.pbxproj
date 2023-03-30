@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E86C326729D5BC15003CF6A8 /* PinedUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86C326629D5BC15003CF6A8 /* PinedUserView.swift */; };
 		E8AF1C7929D412110068AA32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C7829D412110068AA32 /* AppDelegate.swift */; };
 		E8AF1C7B29D412110068AA32 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C7A29D412110068AA32 /* SceneDelegate.swift */; };
 		E8AF1C7D29D412110068AA32 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C7C29D412110068AA32 /* MainViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E86C326629D5BC15003CF6A8 /* PinedUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinedUserView.swift; sourceTree = "<group>"; };
 		E8AF1C7529D412110068AA32 /* Geo2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geo2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8AF1C7829D412110068AA32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8AF1C7A29D412110068AA32 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				E8AF1C9629D436EB0068AA32 /* UserInfoView.swift */,
+				E86C326629D5BC15003CF6A8 /* PinedUserView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				E8AF1C7B29D412110068AA32 /* SceneDelegate.swift in Sources */,
 				E8AF1C9929D439240068AA32 /* MainModel.swift in Sources */,
 				E8AF1C9729D436EB0068AA32 /* UserInfoView.swift in Sources */,
+				E86C326729D5BC15003CF6A8 /* PinedUserView.swift in Sources */,
 				E8AF1C8D29D412D90068AA32 /* MainViewModel.swift in Sources */,
 				E8AF1C9529D423DF0068AA32 /* UserTableViewCell.swift in Sources */,
 				E8AF1C9E29D456B60068AA32 /* LocationService.swift in Sources */,
