@@ -12,7 +12,7 @@ protocol MockServiceProtocol {
     func fetchUsersFromAPI() -> [User]
 }
 
-class MockService {
+final class MockService {
     var users: [User] = [
         User(name: "Dmitry Medvedev", imageName: "1"),
         User(name: "Anna Karenina", imageName: "2"),

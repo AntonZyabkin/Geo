@@ -10,7 +10,7 @@ import UIKit
 class UserTableViewCell: UITableViewCell {
     
     static let identifier = "UserTableViewCell"
-    var view = UserInfoView(frame: .zero , user: User())
+    var userInfoView = UserInfoView(frame: .zero , user: User())
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,25 +23,25 @@ class UserTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0))
     }
     
     func configureCell() {
-        contentView.addSubview(view)
         backgroundColor = .clear
+        contentView.addSubview(userInfoView)
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 16
         NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            userInfoView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            userInfoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            userInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            userInfoView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
         ])
-        view.translatesAutoresizingMaskIntoConstraints = false
+        userInfoView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     
     func updateCell(_ user: User) {
-        view.configSubviews(user: user)
+        userInfoView.configSubviews(user: user)
     }
 }

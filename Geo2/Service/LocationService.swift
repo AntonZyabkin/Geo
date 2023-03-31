@@ -8,13 +8,18 @@
 import Foundation
 import CoreLocation
 
+protocol LocationServiceProtocol {
+    func getUserLocation(complition: @escaping (CLLocation)-> Void)
+}
 
 final class LocationService: NSObject {
-    static let shared = LocationService()
     let service = CLLocationManager()
     var complition: ((CLLocation)-> Void)?
+}
+
+extension LocationService: LocationServiceProtocol {
     
-    public func getUserLocation(complition: @escaping (CLLocation)-> Void) {
+    func getUserLocation(complition: @escaping (CLLocation)-> Void) {
         self.complition = complition
         service.requestWhenInUseAuthorization()
         service.delegate = self
