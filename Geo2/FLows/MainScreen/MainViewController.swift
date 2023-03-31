@@ -18,7 +18,7 @@ protocol MainViewControllerProtocol {
 
 final class MainViewController: UIViewController {
     
-    var viewModel: MainViewModelProtocol?
+    var presenter: MainPresenterProtocol?
     
     private lazy var profileInfoView: ProfileInfoView = {
         let view = ProfileInfoView(frame: .zero, name: "e-legion", latitude: 0, longitude: 0, imageName: "logo")
@@ -94,13 +94,13 @@ final class MainViewController: UIViewController {
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel?.users.count ?? 0
+        presenter?.users.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.identifier, for: indexPath) as? UserTableViewCell,
-            let user = viewModel?.users[indexPath.row]
+            let user = presenter?.users[indexPath.row]
         else {
             return UITableViewCell()
         }
@@ -109,7 +109,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel?.didSelectRowAt(indexPath: indexPath)
+        presenter?.didSelectRowAt(indexPath: indexPath)
     }
 }
 

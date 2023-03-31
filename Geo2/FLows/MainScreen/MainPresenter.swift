@@ -1,5 +1,5 @@
 //
-//  MainViewModel.swift
+//  MainPresenter.swift
 //  Geo2
 //
 //  Created by Anton Zyabkin on 29.03.2023.
@@ -8,12 +8,12 @@
 import Foundation
 import MapKit
 
-protocol MainViewModelProtocol {
+protocol MainPresenterProtocol {
     func didSelectRowAt(indexPath: IndexPath)
     var users: [User] { get }
 }
 
-final class MainViewModel {
+final class MainPresenter {
     
     private var profileUser = User(name: " ", imageName: "logo")
     private var selectedUser: User
@@ -85,7 +85,7 @@ final class MainViewModel {
     }
 }
 
-extension MainViewModel: MainViewModelProtocol {
+extension MainPresenter: MainPresenterProtocol {
     
     func didSelectRowAt(indexPath: IndexPath) {
         switch selectedUser.id {

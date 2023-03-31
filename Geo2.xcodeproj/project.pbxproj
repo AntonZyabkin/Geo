@@ -14,7 +14,7 @@
 		E8AF1C7D29D412110068AA32 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C7C29D412110068AA32 /* MainViewController.swift */; };
 		E8AF1C8229D412130068AA32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8AF1C8129D412130068AA32 /* Assets.xcassets */; };
 		E8AF1C8529D412130068AA32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8AF1C8329D412130068AA32 /* LaunchScreen.storyboard */; };
-		E8AF1C8D29D412D90068AA32 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C8C29D412D90068AA32 /* MainViewModel.swift */; };
+		E8AF1C8D29D412D90068AA32 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C8C29D412D90068AA32 /* MainPresenter.swift */; };
 		E8AF1C9529D423DF0068AA32 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C9429D423DF0068AA32 /* UserTableViewCell.swift */; };
 		E8AF1C9729D436EB0068AA32 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C9629D436EB0068AA32 /* UserInfoView.swift */; };
 		E8AF1C9929D439240068AA32 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF1C9829D439240068AA32 /* MainModel.swift */; };
@@ -32,7 +32,7 @@
 		E8AF1C8129D412130068AA32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8AF1C8429D412130068AA32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8AF1C8629D412130068AA32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E8AF1C8C29D412D90068AA32 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		E8AF1C8C29D412D90068AA32 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		E8AF1C9429D423DF0068AA32 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		E8AF1C9629D436EB0068AA32 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		E8AF1C9829D439240068AA32 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				E8AF1C7C29D412110068AA32 /* MainViewController.swift */,
-				E8AF1C8C29D412D90068AA32 /* MainViewModel.swift */,
+				E8AF1C8C29D412D90068AA32 /* MainPresenter.swift */,
 				E8AF1C9429D423DF0068AA32 /* UserTableViewCell.swift */,
 				E8AF1C9829D439240068AA32 /* MainModel.swift */,
 			);
@@ -206,7 +206,7 @@
 				E8AF1C9929D439240068AA32 /* MainModel.swift in Sources */,
 				E8AF1C9729D436EB0068AA32 /* UserInfoView.swift in Sources */,
 				E86C326729D5BC15003CF6A8 /* PinedUserView.swift in Sources */,
-				E8AF1C8D29D412D90068AA32 /* MainViewModel.swift in Sources */,
+				E8AF1C8D29D412D90068AA32 /* MainPresenter.swift in Sources */,
 				E8AF1C9529D423DF0068AA32 /* UserTableViewCell.swift in Sources */,
 				E8AF1C9E29D456B60068AA32 /* LocationService.swift in Sources */,
 			);
